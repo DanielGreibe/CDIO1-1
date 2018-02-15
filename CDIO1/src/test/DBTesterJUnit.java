@@ -1,10 +1,6 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 
 import dal.IUserDAO;
 import dal.IUserDAO.DALException;
@@ -13,15 +9,12 @@ import data.UserDTO;
 
 public class DBTesterJUnit {
 
-	@Test
 	void test() {
-		fail("Not yet implemented");
-	}
 
 	IUserDAO iDAO = new UserDAODiscImpl();
 	UserDTO newUser = new UserDTO();
 
-	void printUsers(iDAO);
+	printUsers(iDAO);
 	//TODO test new fields...
 	newUser.setIni("test");
 	newUser.addRole("Admin");
@@ -66,7 +59,7 @@ public class DBTesterJUnit {
 	
 	printUsers(iDAO);
 	
-	
+	fail("Not yet implemented");
 }
 
 	private static void printUsers(IUserDAO iDAO) {
