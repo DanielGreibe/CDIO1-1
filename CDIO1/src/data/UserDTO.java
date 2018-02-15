@@ -1,4 +1,4 @@
-package dto;
+package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -77,7 +77,6 @@ public class UserDTO implements Serializable {
 		return this.roles.remove(role);
 	}
 
-	@Override
 	public String toString() {
 		return "UserDTO [userId=" + userId + ", userName=" + userName + ", ini=" + ini + ", roles=" + roles + "]";
 	}

@@ -3,10 +3,10 @@ package test;
 
 import java.util.List;
 
-import dal.IUserDAO;
-import dal.IUserDAO.DALException;
 import dal.UserDAODiscImpl;
-import dto.UserDTO;
+import data.UserDTO;
+import funktion.IUserDAO;
+import funktion.IUserDAO.DALException;
 
 public class DBTester {
 	//TODO refactor as JUnit test???
