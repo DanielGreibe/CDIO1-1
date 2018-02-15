@@ -4,7 +4,7 @@ public class MainController {
 	
 	public MainController() {
 		
-		CRUD Interface = new CRUD();
+		TUI Interface = new TUI();
 
 	}
 
