@@ -1,6 +1,7 @@
 package funktion;
 
 import java.util.List;
+
 import data.UserDTO;
 
 public class DataManager implements IUserDAO {
@@ -9,31 +10,37 @@ public class DataManager implements IUserDAO {
 
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return users.get(userId);
 	}
 
 	@Override
 	public List<UserDTO> getUserList() throws DALException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return users;
 	}
 
 	@Override
 	public void createUser(UserDTO user) throws DALException {
-		// TODO Auto-generated method stub
+		
+		users.add(user);
 		
 	}
 
 	@Override
 	public void updateUser(UserDTO user) throws DALException {
-		// TODO Auto-generated method stub
+		
+		int i = user.getUserId();
+		
+		users.set(i-11, user);
+		
 		
 	}
 
 	@Override
 	public void deleteUser(int userId) throws DALException {
-		// TODO Auto-generated method stub
+		
+		users.remove(userId);
 		
 	}
 
