@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+// User Data Object
 public class UserDTO implements Serializable{
 
 	private static final long serialVersionUID = 4545864587995944260L;
@@ -11,7 +12,6 @@ public class UserDTO implements Serializable{
 	private String userName;                
 	private String ini;                 
 	private List<String> roles;
-	//TODO Add relevant fields
 	
 	public UserDTO() {
 		this.roles = new ArrayList<>();
@@ -46,11 +46,11 @@ public class UserDTO implements Serializable{
 	public void addRole(String role){
 		this.roles.add(role);
 	}
-	/**
-	 * 
-	 * @param role
-	 * @return true if role existed, false if not
-	 */
+
+	public boolean roleExists(String role) {
+		return this.roles.contains(role);
+	}
+	
 	public boolean removeRole(String role){
 		return this.roles.remove(role);
 	}
