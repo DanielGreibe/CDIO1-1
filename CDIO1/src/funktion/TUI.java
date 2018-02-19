@@ -1,5 +1,6 @@
 package funktion;
 
+import java.util.List;
 import java.util.Scanner;
 
 import data.UserDTO;
@@ -66,7 +67,11 @@ public class TUI {
 		System.out.println("Printing all users:");
 		System.out.println("");
 		try {
-			System.out.println(data.getUserList().toString());
+			List<UserDTO> userList = data.getUserList();
+				System.err.println("There are no users.");
+			for (UserDTO userDTO : userList) {
+				System.out.println(userDTO);
+			}
 		} catch (DALException e) {
 			System.err.println("Could not recieve UserList from Data");
 			e.printStackTrace();
@@ -126,7 +131,7 @@ public class TUI {
 
 		System.out.println("Type a username. Must be atleast 2 and maximally 20 characters");
 		do {
-			username = keyb.nextLine();
+			username = keyb.next();
 		} while (!checkUsername(username));
 		tempUser.setUserName(username);
 		System.out.println("Name set as " + tempUser.getUserName());
@@ -134,14 +139,14 @@ public class TUI {
 
 		System.out.println("Type initials. Must be atleast 2 and maximally 4 characters");
 		do {
-			initials = keyb.nextLine();
+			initials = keyb.next();
 		} while (!checkInitials(initials));
 		tempUser.setIni(initials);
 		System.out.println("Initials set as " + tempUser.getIni());
 		System.out.println("");
 
 		System.out.println("Type CPR-number.");
-		CPR = keyb.nextLine();
+		CPR = keyb.next();
 		tempUser.setCPR(CPR);
 		System.out.println("CPR set as " + tempUser.getCPR());
 		System.out.println("");
@@ -156,7 +161,7 @@ public class TUI {
 
 		while (moreRoles) {
 			System.out.println("Type a role to add to the user. Type DONE to finish.");
-			role = keyb.nextLine();
+			role = keyb.next();
 			if (role.equals("DONE"))
 				break;
 			tempUser.addRole(role);
@@ -173,21 +178,21 @@ public class TUI {
 	}
 
 	private boolean checkUserID(int iD) {
-		if (iD <= 11 && iD >= 99)
+		if (iD >= 11 && iD <= 99)
 			return true;
 		System.out.println("User-ID is invalid. Try again.");
 		return false;
 	}
 
 	private boolean checkInitials(String initials) {
-		if (initials.length() <= 2 && (initials.length()) >= 4)
+		if (initials.length() >= 2 && (initials.length()) <= 4)
 			return true;
 		System.out.println("Initials are invalid. Try again.");
 		return false;
 	}
 
 	private boolean checkUsername(String username) {
-		if (username.length() <= 2 && (username.length()) >= 20)
+		if (username.length() >= 2 && (username.length()) <= 20)
 			return true;
 		System.out.println("Username is invalid. Try again.");
 		return false;
