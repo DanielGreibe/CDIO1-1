@@ -35,7 +35,7 @@ public class DataManager implements IUserDAO {
 	@Override
 	public void createUser(UserDTO user) throws DALException {
 
-		user = new UserDTO();
+		
 
 		users.add(user);
 
