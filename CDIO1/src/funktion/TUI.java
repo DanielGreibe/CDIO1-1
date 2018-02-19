@@ -131,7 +131,7 @@ public class TUI {
 
 		System.out.println("Type a username. Must be atleast 2 and maximally 20 characters");
 		do {
-			username = keyb.nextLine();
+			username = keyb.next();
 		} while (!checkUsername(username));
 		tempUser.setUserName(username);
 		System.out.println("Name set as " + tempUser.getUserName());
@@ -139,14 +139,14 @@ public class TUI {
 
 		System.out.println("Type initials. Must be atleast 2 and maximally 4 characters");
 		do {
-			initials = keyb.nextLine();
+			initials = keyb.next();
 		} while (!checkInitials(initials));
 		tempUser.setIni(initials);
 		System.out.println("Initials set as " + tempUser.getIni());
 		System.out.println("");
 
 		System.out.println("Type CPR-number.");
-		CPR = keyb.nextLine();
+		CPR = keyb.next();
 		tempUser.setCPR(CPR);
 		System.out.println("CPR set as " + tempUser.getCPR());
 		System.out.println("");
@@ -161,7 +161,7 @@ public class TUI {
 
 		while (moreRoles) {
 			System.out.println("Type a role to add to the user. Type DONE to finish.");
-			role = keyb.nextLine();
+			role = keyb.next();
 			if (role.equals("DONE"))
 				break;
 			tempUser.addRole(role);
