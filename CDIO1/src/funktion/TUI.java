@@ -3,6 +3,7 @@ package funktion;
 import java.util.Scanner;
 
 import data.UserDTO;
+import funktion.IUserDAO.DALException;
 
 public class TUI {
 
@@ -64,16 +65,25 @@ public class TUI {
 		
 		System.out.println("Printing all users:");
 		System.out.println("");
-		System.out.println(data.getUserList().toString());
+		try {
+			System.out.println(data.getUserList().toString());
+		} catch (DALException e) {
+			System.err.println("Could not recieve UserList from Data");
+			e.printStackTrace();
+		}
 		
 	}
 
 	private void deleteUser() {
-		UserDTO tempUser;
 		int ID;
 		System.out.println("Type User-ID of what User you wish to delete.");
 		ID = keyb.nextInt();
-		data.deleteUser(ID);
+		try {
+			data.deleteUser(ID);
+		} catch (DALException e) {
+			System.err.println("Could not delete user - probably didn't exist.");
+			e.printStackTrace();
+		}
 		System.out.println("User attempted deleted.");
 		
 	}
@@ -84,11 +94,16 @@ public class TUI {
 	}
 
 	private void readUser() {
-		UserDTO tempUser;
+		UserDTO tempUser = null;
 		int ID;
 		System.out.println("Type User-ID of what User you wish to read.");
 		ID = keyb.nextInt();
-		tempUser = data.getUser(ID);
+		try {
+			tempUser = data.getUser(ID);
+		} catch (DALException e) {
+			System.err.println("Could not get user, does not exist.");
+			e.printStackTrace();
+		}
 		if (tempUser != null)
 			System.out.println(tempUser.toString());
 		else
@@ -149,7 +164,12 @@ public class TUI {
 		}
 		System.out.println("");
 		System.out.println("User creation complete. Saving to datamanager.");
-		data.createUser(tempUser);
+		try {
+			data.createUser(tempUser);
+		} catch (DALException e) {
+			System.err.println("Could not create user (wtf??");
+			e.printStackTrace();
+		}
 	}
 
 	private boolean checkUserID(int iD) {
