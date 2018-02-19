@@ -3,6 +3,9 @@ package data;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import data.UserDTO.passWord;
 
 // User Data Object
 public class UserDTO implements Serializable {
@@ -12,7 +15,8 @@ public class UserDTO implements Serializable {
 	private String userName;
 	private String ini;
 	private String CPR;
-	private passWord password;
+	public passWord password;
+
 	public String getCPR() {
 		return CPR;
 	}
@@ -31,18 +35,24 @@ public class UserDTO implements Serializable {
 
 	private List<String> roles;
 
-	// TODO Add relevant fields
+	public class passWord {
 
-	class passWord {
-		
 		public passWord() {
 			
 		}
-		
-		private String generatePassWord() {
-			
-			return null;
-			
+
+		public String generatePassWord() {
+
+			String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+			StringBuilder salt = new StringBuilder();
+			Random rnd = new Random();
+			while (salt.length() < 10) { // length of the random string.
+				int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+				salt.append(SALTCHARS.charAt(index));
+			}
+			String saltStr = salt.toString();
+			return saltStr;
+
 		}
 
 	}
@@ -90,8 +100,8 @@ public class UserDTO implements Serializable {
 	public boolean roleExists(String role) {
 		return this.roles.contains(role);
 	}
-	
-	public boolean removeRole(String role){
+
+	public boolean removeRole(String role) {
 		return this.roles.remove(role);
 	}
 
