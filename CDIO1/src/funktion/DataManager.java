@@ -23,12 +23,10 @@ public class DataManager implements IUserDAO {
 				break;
 			}
 
-			if (users.get(j) == null) {
-				return null;
-			}
+			return users.get(j);
 		}
 
-		return users.get(j);
+		return null;
 
 	}
 
