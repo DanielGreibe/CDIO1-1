@@ -16,7 +16,6 @@ public class DataManager implements IUserDAO {
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
 
-		int j = 0;
 		for (UserDTO i : users) {
 			if (i.getUserId() == userId) {
 
