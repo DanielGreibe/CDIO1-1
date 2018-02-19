@@ -4,14 +4,14 @@ import java.util.List;
 
 import dal.IUserDAO;
 import dal.IUserDAO.DALException;
-import dal.UserDAODiscImpl;
 import data.UserDTO;
+import funktion.DataManager;
 
 public class DBTesterJUnit {
 
 	void test() {
 
-	IUserDAO iDAO = new UserDAODiscImpl();
+	DataManager iDAO = new DataManager();
 	UserDTO newUser = new UserDTO();
 
 	printUsers(iDAO);
@@ -39,6 +39,7 @@ public class DBTesterJUnit {
 	} catch (DALException e1) {
 		e1.printStackTrace();
 	}
+	
 	printUsers(iDAO);
 	newUser.setUserId(0);
 	newUser.setUserName("ModifiedName");
@@ -62,7 +63,7 @@ public class DBTesterJUnit {
 	fail("Not yet implemented");
 }
 
-	private static void printUsers(IUserDAO iDAO) {
+	private static void printUsers(DataManager iDAO) {
 		try {
 			System.out.println("Printing users...");
 			List<UserDTO> userList = iDAO.getUserList();

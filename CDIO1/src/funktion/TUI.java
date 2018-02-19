@@ -1,5 +1,6 @@
 package funktion;
 
+import java.util.List;
 import java.util.Scanner;
 
 import data.UserDTO;
@@ -66,7 +67,11 @@ public class TUI {
 		System.out.println("Printing all users:");
 		System.out.println("");
 		try {
-			System.out.println(data.getUserList().toString());
+			List<UserDTO> userList = data.getUserList();
+				System.err.println("There are no users.");
+			for (UserDTO userDTO : userList) {
+				System.out.println(userDTO);
+			}
 		} catch (DALException e) {
 			System.err.println("Could not recieve UserList from Data");
 			e.printStackTrace();
@@ -173,21 +178,21 @@ public class TUI {
 	}
 
 	private boolean checkUserID(int iD) {
-		if (iD <= 11 && iD >= 99)
+		if (iD >= 11 && iD <= 99)
 			return true;
 		System.out.println("User-ID is invalid. Try again.");
 		return false;
 	}
 
 	private boolean checkInitials(String initials) {
-		if (initials.length() <= 2 && (initials.length()) >= 4)
+		if (initials.length() >= 2 && (initials.length()) <= 4)
 			return true;
 		System.out.println("Initials are invalid. Try again.");
 		return false;
 	}
 
 	private boolean checkUsername(String username) {
-		if (username.length() <= 2 && (username.length()) >= 20)
+		if (username.length() >= 2 && (username.length()) <= 20)
 			return true;
 		System.out.println("Username is invalid. Try again.");
 		return false;
