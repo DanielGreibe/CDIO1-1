@@ -1,5 +1,6 @@
 package funktion;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class TUI {
 			System.out.println("\t3. Update User");
 			System.out.println("\t4. Delete User");
 			System.out.println("\t5. See All Users");
-			System.out.println("\t6. Exit Program User");
+			System.out.println("\t6. Exit Program");
 			System.out.println("");
 			switch (getUserInput()) {
 			case 1:
@@ -68,6 +69,7 @@ public class TUI {
 		System.out.println("");
 		try {
 			List<UserDTO> userList = data.getUserList();
+			if (userList.isEmpty())
 				System.err.println("There are no users.");
 			for (UserDTO userDTO : userList) {
 				System.out.println(userDTO);
@@ -89,7 +91,7 @@ public class TUI {
 			System.err.println("Could not delete user - probably didn't exist.");
 			e.printStackTrace();
 		}
-		System.out.println("User attempted deleted.");
+		System.out.println("User deleted.");
 		
 	}
 
@@ -98,6 +100,7 @@ public class TUI {
 		
 	}
 
+	// TODO Make printout much nicer.
 	private void readUser() {
 		UserDTO tempUser = null;
 		int ID;
@@ -106,13 +109,13 @@ public class TUI {
 		try {
 			tempUser = data.getUser(ID);
 		} catch (DALException e) {
-			System.err.println("Could not get user, does not exist.");
+			System.err.println("Could not get user, hit DALException.");
 			e.printStackTrace();
 		}
-		if (tempUser != null)
+		if (tempUser != null && tempUser.getUserName() != null)
 			System.out.println(tempUser.toString());
 		else
-			System.out.println("Could not find user.");
+			System.err.println("Could not find user.");
 
 	}
 
@@ -171,16 +174,31 @@ public class TUI {
 		System.out.println("User creation complete. Saving to datamanager.");
 		try {
 			data.createUser(tempUser);
+			System.out.println("Saving to datamanager successful.");
 		} catch (DALException e) {
-			System.err.println("Could not create user (wtf??");
+			System.err.println("Could not save to datamanager due to DALException.");
 			e.printStackTrace();
 		}
 	}
 
 	private boolean checkUserID(int iD) {
+		try {
+			List<UserDTO> tempUserList = data.getUserList();
+			for (UserDTO i: tempUserList) {
+				if (i.getUserId() == iD)
+					System.out.println("User-ID is invalid. Try again.");
+					return false;
+			}
+		} catch (DALException e) {
+			System.err.println("Could not get user list in checkID.");
+			e.printStackTrace();
+		}
 		if (iD >= 11 && iD <= 99)
+			
 			return true;
 		System.out.println("User-ID is invalid. Try again.");
+		
+		
 		return false;
 	}
 
