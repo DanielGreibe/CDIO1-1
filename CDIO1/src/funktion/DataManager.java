@@ -1,5 +1,6 @@
 package funktion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import data.UserDTO;
@@ -7,6 +8,14 @@ import data.UserDTO;
 public class DataManager implements IUserDAO {
 
 	private List<UserDTO> users;
+	
+	
+	public DataManager() {
+		users = new ArrayList<UserDTO>(89);
+	}
+	
+	
+	
 
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
