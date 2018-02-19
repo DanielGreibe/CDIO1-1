@@ -19,15 +19,11 @@ public class DataManager implements IUserDAO {
 		int j = 0;
 		for (UserDTO i : users) {
 			if (i.getUserId() == userId) {
-				j = users.indexOf(i);
-				break;
+
+				return i;
 			}
-
-			return users.get(j);
 		}
-
 		return null;
-
 	}
 
 	@Override
