@@ -37,7 +37,7 @@ public class DataManager implements IUserDAO {
 		for (UserDTO i : users) {
 			if (i.getUserId() != user.getUserId()) {
 
-				users.add(i);
+				users.add(user);
 			}
 		}
 
