@@ -10,21 +10,17 @@ public class DataManager implements IUserDAO {
 
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
-		try {
-			int j = 0;
-			for (UserDTO i : users) {
-				if (i.getUserId() == userId) {
-					j = users.indexOf(userId);
-				}
-			}
 
-			return users.get(j);
-			
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Denne bruger findes ikke");
+		int j = 0;
+		for (UserDTO i : users) {
+			if (i.getUserId() == userId) {
+				j = users.indexOf(i);
+				break;
+			}
 		}
-		
-		return null;
+
+		return users.get(j);
+
 	}
 
 	@Override
@@ -54,19 +50,15 @@ public class DataManager implements IUserDAO {
 	@Override
 	public void deleteUser(int userId) throws DALException {
 
-		try {
-			int j = 0;
-			for (UserDTO i : users) {
-				if (i.getUserId() == userId) {
-					j = users.indexOf(userId);
-				}
+		int j = 0;
+		for (UserDTO i : users) {
+			if (i.getUserId() == userId) {
+				j = users.indexOf(i);
+				break;
 			}
-
-			users.remove(j);
-		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Du kan ikke slette en bruger,"
-					+ "som allerede ikke eksisterer");
 		}
+
+		users.remove(j);
 
 	}
 
