@@ -52,7 +52,7 @@ public class DataManager implements IUserDAO {
 		int j = 0;
 		for (UserDTO i : users) {
 			if (i.getUserId() == userId) {
-				j = users.indexOf(userId);
+				j = users.indexOf(i);
 			}
 		}
 
