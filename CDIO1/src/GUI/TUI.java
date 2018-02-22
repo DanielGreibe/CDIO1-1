@@ -1,9 +1,11 @@
-package funktion;
+package GUI;
 
 import java.util.List;
 import java.util.Scanner;
 
 import data.UserDTO;
+import funktion.DataManager;
+import funktion.IUserDAO;
 import funktion.IUserDAO.DALException;
 
 public class TUI {
