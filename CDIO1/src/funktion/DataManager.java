@@ -52,10 +52,13 @@ public class DataManager implements IUserDAO {
 
 	@Override
 	public void updateUser(UserDTO user) throws DALException {
+		int ID = user.getUserId();
+		for (int j = 0; j < users.size(); j++) {
+			if (users.get(j).getUserId() == ID)
+				users.set(j, user);
+		}
 
-		int i = users.indexOf(user);
 
-		users.set(i, user);
 
 	}
 

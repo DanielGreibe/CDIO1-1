@@ -10,7 +10,7 @@ import org.junit.Test;
 import data.UserDTO;
 import funktion.DataManager;
 import funktion.IUserDAO.DALException;
-import funktion.TUI;
+import TUI.TUI;
 
 public class AddUserTest {
 	DataManager DataManagerTest;
