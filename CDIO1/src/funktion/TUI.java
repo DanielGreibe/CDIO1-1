@@ -84,9 +84,74 @@ public class TUI {
 
 	}
 
-	private void updateUser() {
-		// TODO Auto-generated method stub
+	private void updateUser() throws DALException {
+		// All attributes required.
+		UserDTO tempUser = new UserDTO();
+		String username = null;
+		String initials = null;
+		String CPR = null;
+		int ID;
+		String role = null;
+		boolean moreRoles = true;
 
+		System.out.println("You are now updating a user.");
+		System.out.println("");
+
+		System.out.println("Type User-ID of user you wish to change. List of all users is printed here:");
+		seeAllUsers();
+		do {
+			ID = keyb.nextInt();
+		} while (!checkUserExistsID(ID));
+		tempUser.setUserId(ID);
+		System.out.println("You wish to edit user with ID " + tempUser.getUserId());
+		System.out.println("");
+
+		System.out.println("Type new username. Must be atleast 2 and maximally 20 characters");
+		do {
+			username = keyb.next();
+		} while (!checkUsername(username));
+		tempUser.setUserName(username);
+		System.out.println("New name set as " + tempUser.getUserName());
+		System.out.println("");
+
+		System.out.println("Type new initials. Must be atleast 2 and maximally 4 characters");
+		do {
+			initials = keyb.next();
+		} while (!checkInitials(initials));
+		tempUser.setIni(initials);
+		System.out.println("Initials set as " + tempUser.getIni());
+		System.out.println("");
+
+		System.out.println("Type new CPR-number.");
+		CPR = keyb.next();
+		tempUser.setCPR(CPR);
+		System.out.println("CPR set as " + tempUser.getCPR());
+		System.out.println("");
+
+		while (moreRoles) {
+			System.out.println("Type a role to add to the user. You must retype all established roles. Type DONE to finish.");
+			role = keyb.next();
+			if (role.equals("DONE"))
+				break;
+			tempUser.addRole(role);
+			System.out.println("");
+		}
+		System.out.println("");
+		System.out.println("User update complete. Saving to datamanager.");
+		data.updateUser(tempUser);
+		System.out.println("Saving to datamanager successful.");
+	}
+	
+	private boolean checkUserExistsID(int iD) throws DALException {
+		List<UserDTO> tempUserList = data.getUserList();
+			for (int i = 0; i < tempUserList.size(); i++) {
+				if (tempUserList.get(i).getUserId() == iD) {
+					System.out.println("User found.");
+					return true;
+				}
+			}
+		System.out.println("User-ID does not exist already. Try again.");
+		return false;
 	}
 
 	// TODO Make printout much nicer.
@@ -156,24 +221,21 @@ public class TUI {
 		}
 		System.out.println("");
 		System.out.println("User creation complete. Saving to datamanager.");
-		try {
-			data.createUser(tempUser);
-			System.out.println("Saving to datamanager successful.");
-		} catch (DALException e) {
-			System.err.println("Could not save to datamanager due to DALException.");
-			e.printStackTrace();
-		}
+		data.createUser(tempUser);
+		System.out.println("Saving to datamanager successful.");
 	}
 
 	private boolean checkUserID(int iD) throws DALException {
 		List<UserDTO> tempUserList = data.getUserList();
-		for (UserDTO i : tempUserList) {
-			if (i.getUserId() == iD)
-				System.out.println("User-ID is invalid. Try again.");
-			return false;
-		}
-		if (iD >= 11 && iD <= 99)
+		if (iD >= 11 && iD <= 99) {
+			for (int i = 0; i < tempUserList.size(); i++) {
+				if (tempUserList.get(i).getUserId() == iD) {
+					System.out.println("User-ID is invalid. Try again.");
+					return false;
+				}
+			}
 			return true;
+		}
 		System.out.println("User-ID is invalid. Try again.");
 		return false;
 	}
