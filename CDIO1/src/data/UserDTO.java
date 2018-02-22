@@ -116,6 +116,7 @@ public class UserDTO implements Serializable {
 	}
 	
 	private UserStore loadUsers() throws DALException {
+		UserStore a = new UserStore();
 		UserStore userStore = new UserStore();
 		ObjectInputStream oIS = null;
 		try {
@@ -144,6 +145,7 @@ public class UserDTO implements Serializable {
 		}
 		return userStore;
 	}
+	
 
 	private void saveUsers(UserStore users) throws DALException {
 		ObjectOutputStream oOS =null;
