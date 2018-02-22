@@ -1,4 +1,4 @@
-package GUI;
+package TUI;
 
 import java.util.List;
 import java.util.Scanner;
