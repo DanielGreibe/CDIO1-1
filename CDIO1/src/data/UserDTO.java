@@ -65,6 +65,7 @@ public class UserDTO implements Serializable {
 
 	}
 
+	//Constructor
 	public UserDTO() {
 		this.roles = new ArrayList<>();
 	}
