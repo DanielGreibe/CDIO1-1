@@ -1,6 +1,6 @@
 package funktion;
 
-import GUI.TUI;
+import TUI.TUI;
 import funktion.IUserDAO.DALException;
 
 public class MainController {
