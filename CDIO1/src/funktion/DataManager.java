@@ -16,20 +16,13 @@ public class DataManager implements IUserDAO {
 	@Override
 	public UserDTO getUser(int userId) throws DALException {
 
-		int j = 0;
 		for (UserDTO i : users) {
 			if (i.getUserId() == userId) {
-				j = users.indexOf(i);
-				break;
-			}
 
-			if (users.get(j) == null) {
-				return null;
+				return i;
 			}
 		}
-
-		return users.get(j);
-
+		return null;
 	}
 
 	@Override
@@ -41,9 +34,7 @@ public class DataManager implements IUserDAO {
 	@Override
 	public void createUser(UserDTO user) throws DALException {
 
-		user = new UserDTO();
-
-		users.add(user);
+				users.add(user);
 
 	}
 

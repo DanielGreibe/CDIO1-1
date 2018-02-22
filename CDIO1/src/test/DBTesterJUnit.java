@@ -2,7 +2,6 @@ package test;
 
 import java.util.List;
 
-import dal.IUserDAO;
 import dal.IUserDAO.DALException;
 import data.UserDTO;
 import funktion.DataManager;
@@ -11,56 +10,60 @@ public class DBTesterJUnit {
 
 	void test() {
 
-	DataManager iDAO = new DataManager();
+	DataManager data = new DataManager();
 	UserDTO newUser = new UserDTO();
 
-	printUsers(iDAO);
-	//TODO test new fields...
+	printUsers(data);
+
 	newUser.setIni("test");
 	newUser.addRole("Admin");
 	newUser.setUserName("testName");
-	newUser.setUserId(0);
+	newUser.setUserId(30);
 	try {
-		iDAO.createUser(newUser);
-	} catch (DALException e) {
+		data.createUser(newUser);
+	} catch (funktion.IUserDAO.DALException e) {
 		e.printStackTrace();
 	}
 
 	try {
-		iDAO.createUser(newUser);
-	} catch (DALException e1) {
-		System.out.println("User already existed - OK");
+		data.createUser(newUser);
+	} catch (funktion.IUserDAO.DALException e) {
+		// TODO This part should FAIL - make sure Datamanager doesn't duplicate users.
+		e.printStackTrace();
 	}
 
 	newUser.setUserId(1);
-	newUser.setUserName("2ND user");
+	newUser.setUserName("2NDuser");
 	try {
-		iDAO.createUser(newUser);
-	} catch (DALException e1) {
-		e1.printStackTrace();
-	}
-	
-	printUsers(iDAO);
-	newUser.setUserId(0);
-	newUser.setUserName("ModifiedName");
-	try {
-		iDAO.updateUser(newUser);
-	} catch (DALException e) {
+		data.createUser(newUser);
+	} catch (funktion.IUserDAO.DALException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	
-	printUsers(iDAO);
-	
+	printUsers(data);
+	newUser.setUserId(0);
+	newUser.setUserName("ModifiedName");
 	try {
-		iDAO.deleteUser(1);
-	} catch (DALException e) {
+		data.updateUser(newUser);
+	} catch (funktion.IUserDAO.DALException e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	
-	printUsers(iDAO);
+	printUsers(data);
 	
-	fail("Not yet implemented");
+	try {
+		data.deleteUser(11);
+	} catch (funktion.IUserDAO.DALException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	printUsers(data);
+	
+	// TODO Add fail statement.
+//	fail("Not yet implemented");
 }
 
 	private static void printUsers(DataManager iDAO) {
@@ -71,7 +74,7 @@ public class DBTesterJUnit {
 				System.out.println(userDTO);
 			}
 
-		} catch (DALException e) {
+		} catch (funktion.IUserDAO.DALException e) {
 			e.printStackTrace();
 		}
 	}
