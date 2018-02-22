@@ -31,22 +31,20 @@ public class UserDTO implements Serializable {
 		CPR = cPR;
 	}
 
+	public passWord getPassword() {
+		return password;
+	}
+
+	public void setPassword(passWord password) {
+		this.password = password;
+	}
+
 	private List<String> roles;
 
 	public class passWord {
 
-		String pass;
-		
-		public String getPass() {
-			return pass;
-		}
-
-		public void setPass(String pass) {
-			this.pass = pass;
-		}
-
 		public passWord() {
-			pass = generatePassWord();
+			
 		}
 
 		public String generatePassWord() {
@@ -67,10 +65,6 @@ public class UserDTO implements Serializable {
 
 	public UserDTO() {
 		this.roles = new ArrayList<>();
-	}
-	
-	public String getPass() {
-		return password.getPass();
 	}
 
 	public int getUserId() {
@@ -122,6 +116,7 @@ public class UserDTO implements Serializable {
 	}
 	
 	private UserStore loadUsers() throws DALException {
+		UserStore a = new UserStore();
 		UserStore userStore = new UserStore();
 		ObjectInputStream oIS = null;
 		try {
@@ -150,6 +145,7 @@ public class UserDTO implements Serializable {
 		}
 		return userStore;
 	}
+	
 
 	private void saveUsers(UserStore users) throws DALException {
 		ObjectOutputStream oOS =null;
