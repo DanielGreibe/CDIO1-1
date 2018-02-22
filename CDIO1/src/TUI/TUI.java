@@ -222,6 +222,8 @@ public class TUI {
 			System.out.println("");
 		}
 		System.out.println("");
+		System.out.println("Users password is: " + tempUser.getPassword());
+		System.out.println("");
 		System.out.println("User creation complete. Saving to datamanager.");
 		data.createUser(tempUser);
 		System.out.println("Saving to datamanager successful.");
