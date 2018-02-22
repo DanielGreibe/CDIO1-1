@@ -31,22 +31,20 @@ public class UserDTO implements Serializable {
 		CPR = cPR;
 	}
 
+	public passWord getPassword() {
+		return password;
+	}
+
+	public void setPassword(passWord password) {
+		this.password = password;
+	}
+
 	private List<String> roles;
 
 	public class passWord {
 
-		String pass;
-		
-		public String getPass() {
-			return pass;
-		}
-
-		public void setPass(String pass) {
-			this.pass = pass;
-		}
-
 		public passWord() {
-			pass = generatePassWord();
+			
 		}
 
 		public String generatePassWord() {
@@ -65,13 +63,8 @@ public class UserDTO implements Serializable {
 
 	}
 
-	//Constructor
 	public UserDTO() {
 		this.roles = new ArrayList<>();
-	}
-	
-	public String getPass() {
-		return password.getPass();
 	}
 
 	public int getUserId() {
