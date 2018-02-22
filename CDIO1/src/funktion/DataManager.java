@@ -45,7 +45,6 @@ public class DataManager implements IUserDAO {
 	public void createUser(UserDTO user) throws DALException {
 
 				users.add(user);
-				StoreInUserStore(user);
 				
 
 	}
@@ -110,7 +109,7 @@ public class DataManager implements IUserDAO {
 	
 	private void StoreInUserStore(UserDTO user)
 	{
-		this.StoreObject.addUser(user);
+//		this.StoreObject.addUser(user);
 	}
 	
 
