@@ -1,11 +1,17 @@
 package funktion;
 
+import funktion.IUserDAO.DALException;
+
 public class MainController {
 	
 	public MainController() {
 		
 		TUI Interface = new TUI();
-		Interface.mainMenu();
+		try {
+			Interface.mainMenu();
+		} catch (DALException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

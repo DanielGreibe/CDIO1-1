@@ -1,6 +1,5 @@
 package funktion;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,7 +18,7 @@ public class TUI {
 		running = true;
 	}
 
-	public void mainMenu() {
+	public void mainMenu() throws DALException {
 		System.out.println("--------------------------------------------------------");
 		System.out.println("-");
 		System.out.println("-\t Welcome to CRUD International!");
@@ -63,55 +62,40 @@ public class TUI {
 		System.out.println("Program now exiting. Goodbye!");
 	}
 
-	private void seeAllUsers() {
-		
+	private void seeAllUsers() throws DALException {
+
 		System.out.println("Printing all users:");
 		System.out.println("");
-		try {
-			List<UserDTO> userList = data.getUserList();
-			if (userList.isEmpty())
-				System.err.println("There are no users.");
-			for (UserDTO userDTO : userList) {
-				System.out.println(userDTO);
-			}
-		} catch (DALException e) {
-			System.err.println("Could not recieve UserList from Data");
-			e.printStackTrace();
+		List<UserDTO> userList = data.getUserList();
+		if (userList.isEmpty())
+			System.err.println("There are no users.");
+		for (UserDTO userDTO : userList) {
+			System.out.println(userDTO);
 		}
-		
+
 	}
 
-	private void deleteUser() {
+	private void deleteUser() throws DALException {
 		int ID;
 		System.out.println("Type User-ID of what User you wish to delete.");
 		ID = keyb.nextInt();
-		try {
-			data.deleteUser(ID);
-		} catch (DALException e) {
-			System.err.println("Could not delete user - probably didn't exist.");
-			e.printStackTrace();
-		}
+		data.deleteUser(ID);
 		System.out.println("User deleted.");
-		
+
 	}
 
 	private void updateUser() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	// TODO Make printout much nicer.
-	private void readUser() {
+	private void readUser() throws DALException {
 		UserDTO tempUser = null;
 		int ID;
 		System.out.println("Type User-ID of what User you wish to read.");
 		ID = keyb.nextInt();
-		try {
-			tempUser = data.getUser(ID);
-		} catch (DALException e) {
-			System.err.println("Could not get user, hit DALException.");
-			e.printStackTrace();
-		}
+		tempUser = data.getUser(ID);
 		if (tempUser != null && tempUser.getUserName() != null)
 			System.out.println(tempUser.toString());
 		else
@@ -119,7 +103,7 @@ public class TUI {
 
 	}
 
-	private void createUser() {
+	private void createUser() throws DALException {
 		// All attributes required.
 		UserDTO tempUser = new UserDTO();
 		String username = null;
@@ -181,24 +165,16 @@ public class TUI {
 		}
 	}
 
-	private boolean checkUserID(int iD) {
-		try {
-			List<UserDTO> tempUserList = data.getUserList();
-			for (UserDTO i: tempUserList) {
-				if (i.getUserId() == iD)
-					System.out.println("User-ID is invalid. Try again.");
-					return false;
-			}
-		} catch (DALException e) {
-			System.err.println("Could not get user list in checkID.");
-			e.printStackTrace();
+	private boolean checkUserID(int iD) throws DALException {
+		List<UserDTO> tempUserList = data.getUserList();
+		for (UserDTO i : tempUserList) {
+			if (i.getUserId() == iD)
+				System.out.println("User-ID is invalid. Try again.");
+			return false;
 		}
 		if (iD >= 11 && iD <= 99)
-			
 			return true;
 		System.out.println("User-ID is invalid. Try again.");
-		
-		
 		return false;
 	}
 
