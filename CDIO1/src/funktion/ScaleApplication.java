@@ -264,7 +264,7 @@ public class ScaleApplication {
 
 	/* Hvad er Weight? */
 	public boolean waitForConfirmation() {
-		if (Weight.buttonPressed = "OK") {
+		if (true /* Der bliver trykket OK på vægten */) {
 			return true;
 		} else {
 			return false;
