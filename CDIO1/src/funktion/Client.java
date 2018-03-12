@@ -39,6 +39,11 @@ public class Client {
 		    
 		    //Continuous loop to write to the scale and receive an answer.
 		    //Prints the message received from the scale.
+		    
+		    // Close all resources.
+		    keyboard.close();
+		    socketClient.close();
+		    
 		    while (!input.equals(stopMessage)) 
 		    {
 		    	System.out.println("Write a input on the keyboard:");
