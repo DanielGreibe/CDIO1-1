@@ -282,7 +282,7 @@ public class ScaleApplication {
 		} 
 		catch (IOException e) 
 		{
-			System.out.println("Fejl opstod ved læsning fra vægten");
+			System.out.println("Fejl opstod ved lï¿½sning fra vï¿½gten");
 			e.printStackTrace();
 		}
 		return true;
@@ -296,15 +296,15 @@ public class ScaleApplication {
 			return ScaleOutput;
 		} catch (IOException e) 
 		{
-			System.out.println("Fejl opstod ved læsning af værdi fra vægten");
+			System.out.println("Fejl opstod ved lï¿½sning af vï¿½rdi fra vï¿½gten");
 			e.printStackTrace();
 		}
 		return ScaleOutput;
 	}
 
 	public void AskForID() throws DALException {
-		// Fï¿½rst skrives til vï¿½gten, venter pï¿½ et okay, tager vï¿½rdien fra vï¿½gten
-		// og henter brugeren med samme ID og udskriver navnen pï¿½ den bruger
+		// Fï¿½rst skrives til vÃ¦gten, venter pÃ¥ et okay, tager vÃ¦rdien fra vÃ¦gten
+		// og henter brugeren med samme ID og udskriver navnen pÃ¥ den bruger
 		// og venter til sidst pï¿½ et ok fra brugeren.
 		writeText("Indtast ID");
 		waitForConfirmation();
