@@ -21,7 +21,10 @@ public class Client {
 		{
 			//Makes a Scanner that is used to read the input to the Scale.
 
-
+			//Makes a Socket with String input as the IP and Int input as Port.
+//			socketClient = new Socket(IP,Portnumber);
+			
+			
 			//Makes a Socket with 169.254.2.2 as the IP and 8000 as Port.
 			socketClient = new Socket("169.254.2.2",8000);
 			System.out.println("Client: "+"Connection Established");

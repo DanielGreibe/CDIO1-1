@@ -1,5 +1,6 @@
 package funktion;
 
+import java.io.IOException;
 import java.util.List;
 
 import TUI.TUI;
@@ -13,6 +14,8 @@ public class ScaleApplication {
 	int tareWeight;
 	TUI textInterface = new TUI();
 	String print;
+	Client Scale = new Client();
+	String TareValue;
 
 	/**
 	 * Method to write text to the Scale with a String as input. The String
@@ -256,24 +259,47 @@ public class ScaleApplication {
 	}
 
 	public void writeText(String text) {
-		// Nedenstï¿½ende er commanden for at skrive tekst til vï¿½gten.
-		// Hvordan det virker? Dunno.
-		String scaleCommand = "D " + text + "crlf";
-		// Weight.Input(scaleCommand);
-	}
-
-	/* Hvad er Weight? */
-	public boolean waitForConfirmation() {
-		if (true /* Der bliver trykket OK pÃ¥ vÃ¦gten */) {
-			return true;
-		} else {
-			return false;
+		try {
+			Scale.SendCommand(text);
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Could not write to the scale");
+			e.printStackTrace();
 		}
 	}
 
+	public boolean waitForConfirmation() {
+		try {
+			if (Scale.ReadOutput() != null) 
+			{
+				return true;
+			} 
+			else
+			{
+				return false;
+			}
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("Fejl opstod ved læsning fra vægten");
+			e.printStackTrace();
+		}
+		return true;
+	}
+
 	public String getScaleInput() {
-		// return Scale.getValue()
-		return "InsertScaleInputHere";
+		String ScaleOutput = "";
+		try {
+			
+			ScaleOutput = Scale.ReadOutput();
+			return ScaleOutput;
+		} catch (IOException e) 
+		{
+			System.out.println("Fejl opstod ved læsning af værdi fra vægten");
+			e.printStackTrace();
+		}
+		return ScaleOutput;
 	}
 
 	public void AskForID() throws DALException {
@@ -293,20 +319,30 @@ public class ScaleApplication {
 		writeText("Indtast ID");
 		waitForConfirmation();
 		String StringBatch = getScaleInput();
-		int Batch = Integer.parseInt(StringBatch);
-		// Hent Batch vï¿½rdien.
-		// Skriv tekst med Batchen ud til brugeren med writeText
+		writeText(StringBatch);
 		waitForConfirmation();
 	}
 
 	public void resetScale() {
-		writeText("Clear Scale");
+		writeText("");
 		waitForConfirmation();
 	}
-
-	public void saveTare() {
-		// tareWeight = Send input to Scale ("S clrf");
+	
+	public void saveTare(String ScaleOutput) 
+	{
+		
+		if ( ScaleOutput.startsWith("T") )
+		{
+			TareValue = ScaleOutput.substring(5, 10);
+		}
+		else
+		{
+			System.out.println("Expected a Tare, but wasn't a Tare");
+			System.out.println("Received output was " + ScaleOutput);
+		}
 
 	}
+	
+	
 
 }
