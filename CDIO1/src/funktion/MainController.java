@@ -4,12 +4,11 @@ import TUI.TUI;
 import funktion.IUserDAO.DALException;
 
 public class MainController {
-	
+
 	public MainController() {
-		
-		TUI Interface = new TUI();
 		try {
-			Interface.mainMenu();
+			ScaleApplication ScaleApp = new ScaleApplication();
+			ScaleApp.CRUDMenu();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
