@@ -25,18 +25,41 @@ public class ScaleApplication {
 	 */
 
 	public ScaleApplication() throws DALException {
+	}
+
+	public void MainMenu() throws DALException {
 		print = "--------------------------------------------------------\n-\n\t Welcome to Scale Application.\n-\n--------------------------------------------------------";
 		textInterface.printText(print);
+		running = true;
+		String action;
+		while (running) {
+			action = textInterface.mainMenu();
+			switch (action) {
+			case "weight":
+				performBalancing();
+				break;
+			case "crud":
+				CRUDMenu();
+				break;
+			case "exit":
+				running = false;
+				break;
+			default:
+				print = "Did not understand query. Please retry.";
+				textInterface.printText(print);
+				break;
+			}
+		}
 
-		// TODO: This shouldn't run before actually asked by a main menu method.
 		CRUDMenu();
 
 	}
 
 	public void CRUDMenu() throws DALException {
 		String action;
+		running = true;
 		while (running) {
-			action = textInterface.mainMenu();
+			action = textInterface.CRUDMenu();
 			switch (action) {
 			case "createUser":
 				createUser();
@@ -270,9 +293,7 @@ public class ScaleApplication {
 	public void writeText(String text) {
 		try {
 			Scale.SendCommand(text);
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			System.out.println("Could not write to the scale");
 			e.printStackTrace();
 		}
@@ -280,17 +301,12 @@ public class ScaleApplication {
 
 	public boolean waitForConfirmation() {
 		try {
-			if (Scale.ReadOutput() != null) 
-			{
+			if (Scale.ReadOutput() != null) {
 				return true;
-			} 
-			else
-			{
+			} else {
 				return false;
 			}
-		} 
-		catch (IOException e) 
-		{
+		} catch (IOException e) {
 			System.out.println("Fejl opstod ved l�sning fra v�gten");
 			e.printStackTrace();
 		}
@@ -300,11 +316,10 @@ public class ScaleApplication {
 	public String getScaleInput() {
 		String ScaleOutput = "";
 		try {
-			
+
 			ScaleOutput = Scale.ReadOutput();
 			return ScaleOutput;
-		} catch (IOException e) 
-		{
+		} catch (IOException e) {
 			System.out.println("Fejl opstod ved l�sning af v�rdi fra v�gten");
 			e.printStackTrace();
 		}
@@ -342,16 +357,12 @@ public class ScaleApplication {
 		writeText("");
 		waitForConfirmation();
 	}
-	
-	public void saveTare(String ScaleOutput) 
-	{
-		
-		if ( ScaleOutput.startsWith("T") )
-		{
+
+	public void saveTare(String ScaleOutput) {
+
+		if (ScaleOutput.startsWith("T")) {
 			TareValue = ScaleOutput.substring(5, 10);
-		}
-		else
-		{
+		} else {
 			System.out.println("Expected a Tare, but wasn't a Tare");
 			System.out.println("Received output was " + ScaleOutput);
 		}
@@ -360,8 +371,13 @@ public class ScaleApplication {
 	
 	public String getTare()
 	{
+<<<<<<< HEAD
 		return TareValue;
 	}
+=======
+		return tareWeight;
+	}
+>>>>>>> branch 'master' of https://github.com/DanielGreibe/CDIO1-1.git
 
 	public void performBalancing()
 	{
