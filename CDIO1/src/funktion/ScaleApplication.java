@@ -258,6 +258,15 @@ public class ScaleApplication {
 		return false;
 	}
 
+	public void tareScale()
+	{
+		try {
+			Scale.SendCommand("T");
+		} catch (IOException e) {
+			System.err.println("Couldn't send command to Scale");
+			e.printStackTrace();
+		}
+	}
 	public void writeText(String text) {
 		try {
 			Scale.SendCommand(text);
@@ -302,7 +311,7 @@ public class ScaleApplication {
 		return ScaleOutput;
 	}
 
-	public void AskForID() throws DALException {
+	public void AskForID() {
 		// Fï¿½rst skrives til vÃ¦gten, venter pÃ¥ et okay, tager vÃ¦rdien fra vÃ¦gten
 		// og henter brugeren med samme ID og udskriver navnen pÃ¥ den bruger
 		// og venter til sidst pï¿½ et ok fra brugeren.
@@ -310,12 +319,18 @@ public class ScaleApplication {
 		waitForConfirmation();
 		String StringID = getScaleInput();
 		int ID = Integer.parseInt(StringID);
-		String username = datalag.getUser(ID).getUserName();
+		String username = "";
+		try {
+			username = datalag.getUser(ID).getUserName();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		writeText(username);
 		waitForConfirmation();
 	}
 
-	public void askForBatch() throws DALException {
+	public void askForBatch()  {
 		writeText("Indtast ID");
 		waitForConfirmation();
 		String StringBatch = getScaleInput();
@@ -323,7 +338,7 @@ public class ScaleApplication {
 		waitForConfirmation();
 	}
 
-	public void resetScale() {
+	public void resetTextOnScale() {
 		writeText("");
 		waitForConfirmation();
 	}
@@ -343,9 +358,29 @@ public class ScaleApplication {
 
 	}
 	
-	public int getTare()
+	public String getTare()
 	{
-		return tareWeight;
+		return TareValue;
 	}
 
+	public void performBalancing()
+	{
+		AskForID();
+		askForBatch();
+		writeText("Flyt alt fra vægten");
+		waitForConfirmation();
+		writeText("Placer tom beholder på vægt");
+		waitForConfirmation();
+		saveTare(getScaleInput());
+		writeText("Put beholder med produkt på vægten");
+		waitForConfirmation();
+		saveTare(getScaleInput());
+		writeText("Flyt alt fra vægten");
+		saveTare(getScaleInput());
+		writeText("Afvejning fuldført");
+		waitForConfirmation();
+		tareScale();
+		
+		
+	}
 }
