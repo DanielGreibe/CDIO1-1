@@ -353,5 +353,10 @@ public class ScaleApplication {
 		}
 
 	}
+	
+	public int getTare()
+	{
+		return tareWeight;
+	}
 
 }
