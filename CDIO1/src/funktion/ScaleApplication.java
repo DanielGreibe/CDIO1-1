@@ -371,14 +371,9 @@ public class ScaleApplication {
 	
 	public String getTare()
 	{
-<<<<<<< HEAD
+
 		return TareValue;
 	}
-=======
-		return tareWeight;
-	}
->>>>>>> branch 'master' of https://github.com/DanielGreibe/CDIO1-1.git
-
 	public void performBalancing()
 	{
 		AskForID();
