@@ -45,8 +45,13 @@ public class Client {
 
 	public void SendCommand(String Command) throws IOException
 	{
+<<<<<<< HEAD
 	//	Command = keyboard.nextLine();
 		writer.write("D" + Command +"\r\n");
+=======
+		Command = keyboard.nextLine();
+		writer.write("D" + "\"" + "\"" + "\r\n");
+>>>>>>> branch 'master' of https://github.com/DanielGreibe/CDIO1-1.git
 		writer.flush();
 	}
 
