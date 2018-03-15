@@ -306,12 +306,12 @@ public class ScaleApplication {
 	public boolean waitForConfirmation() {
 		try {
 			if (Scale.ReadOutput() != null) {
-				return true;
+				return true;   
 			} else {
 				return false;
 			}
 		} catch (IOException e) {
-			System.out.println("Fejl opstod ved l�sning fra v�gten");
+			System.out.println("Fejl opstod ved løsning fra vægten");
 			e.printStackTrace();
 		}
 		return true;
@@ -324,7 +324,7 @@ public class ScaleApplication {
 			ScaleOutput = Scale.ReadOutput();
 			return ScaleOutput;
 		} catch (IOException e) {
-			System.out.println("Fejl opstod ved l�sning af v�rdi fra v�gten");
+			System.out.println("Fejl opstod ved løsning af værdi fra vægten");
 			e.printStackTrace();
 		}
 		return ScaleOutput;
