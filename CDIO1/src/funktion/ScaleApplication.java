@@ -30,9 +30,9 @@ public class ScaleApplication {
 	public void MainMenu() throws DALException {
 		print = "--------------------------------------------------------\n-\n\t Welcome to Scale Application.\n-\n--------------------------------------------------------";
 		textInterface.printText(print);
-		running = true;
+		boolean runningMain = true;
 		String action;
-		while (running) {
+		while (runningMain) {
 			action = textInterface.mainMenu();
 			switch (action) {
 			case "weight":
@@ -41,8 +41,8 @@ public class ScaleApplication {
 			case "crud":
 				CRUDMenu();
 				break;
-			case "exit":
-				running = false;
+			case "quit":
+				runningMain = false;
 				break;
 			default:
 				print = "Did not understand query. Please retry.";
@@ -50,8 +50,6 @@ public class ScaleApplication {
 				break;
 			}
 		}
-
-		CRUDMenu();
 
 	}
 
@@ -378,17 +376,17 @@ public class ScaleApplication {
 	{
 		AskForID();
 		askForBatch();
-		writeText("Flyt alt fra vægten");
+		writeText("Flyt alt fra vï¿½gten");
 		waitForConfirmation();
-		writeText("Placer tom beholder på vægt");
-		waitForConfirmation();
-		saveTare(getScaleInput());
-		writeText("Put beholder med produkt på vægten");
+		writeText("Placer tom beholder pï¿½ vï¿½gt");
 		waitForConfirmation();
 		saveTare(getScaleInput());
-		writeText("Flyt alt fra vægten");
+		writeText("Put beholder med produkt pï¿½ vï¿½gten");
+		waitForConfirmation();
 		saveTare(getScaleInput());
-		writeText("Afvejning fuldført");
+		writeText("Flyt alt fra vï¿½gten");
+		saveTare(getScaleInput());
+		writeText("Afvejning fuldfï¿½rt");
 		waitForConfirmation();
 		tareScale();
 		

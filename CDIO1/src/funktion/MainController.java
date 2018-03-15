@@ -8,7 +8,7 @@ public class MainController {
 	public MainController() {
 		try {
 			ScaleApplication ScaleApp = new ScaleApplication();
-			ScaleApp.CRUDMenu();
+			ScaleApp.MainMenu();
 		} catch (DALException e) {
 			e.printStackTrace();
 		}

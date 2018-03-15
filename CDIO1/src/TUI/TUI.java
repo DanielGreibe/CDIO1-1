@@ -31,7 +31,7 @@ public class TUI {
 		case 2:
 			return "crud";
 		case 3:
-			return "exit";
+			return "quit";
 		default:
 			return "fail";
 		}

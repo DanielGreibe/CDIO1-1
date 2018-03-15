@@ -51,7 +51,6 @@ public class Client {
 
 	public void SendCommand(String Command) throws IOException
 	{
-		System.out.println("Write a input on the keyboard:");
 		Command = keyboard.nextLine();
 		writer.write(Command +"\r\n");
 		writer.flush();
