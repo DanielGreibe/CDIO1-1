@@ -12,7 +12,7 @@ public class TUI {
 		keyb = new Scanner(System.in);
 	}
 	
-	public void printText(String input) {
+	public void printText(String input) { 
 		System.out.println(input);
 	}
 	
@@ -76,4 +76,7 @@ public class TUI {
 		return keyb.next();
 	}
 
+	public void waitForEnter() {
+		keyb.nextLine();
+	}
 }

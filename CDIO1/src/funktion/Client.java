@@ -15,55 +15,45 @@ public class Client {
 	BufferedReader reader;
 	BufferedWriter writer;
 
-	public void Connect(String IP , int Portnumber) throws IOException
-	{
-		try
-		{
-			//Makes a Scanner that is used to read the input to the Scale.
+	public void Connect(String IP, int Portnumber) throws IOException {
+		try {
+			// Makes a Scanner that is used to read the input to the Scale.
 
-			//Makes a Socket with String input as the IP and Int input as Port.
-			socketClient = new Socket(IP,Portnumber);
-			
-			
-			//Makes a Socket with 169.254.2.2 as the IP and 8000 as Port.
-//			socketClient = new Socket("169.254.2.2",8000);
-			System.out.println("Client: "+"Connection Established");
+			// Makes a Socket with String input as the IP and Int input as Port.
+			socketClient = new Socket(IP, Portnumber);
 
-			//Makes a BufferedReader and Writer to write and read from the Socket.
-			reader = 
-					new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+			// Makes a Socket with 169.254.2.2 as the IP and 8000 as Port.
+			// socketClient = new Socket("169.254.2.2",8000);
+			System.out.println("Client: " + "Connection Established");
 
-			writer = 
-					new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));  
+			// Makes a BufferedReader and Writer to write and read from the Socket.
+			reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 
-		}
-		catch(Exception e)
-		{
+			writer = new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream()));
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void SendCommand(String Command) throws IOException
-	{
-
-
-		Command = keyboard.nextLine();
-		writer.write("D" + "\"" + "\"" + "\r\n");
-		writer.flush();
+	public void SendCommand(String Command) throws IOException{
+		try {
+			writer.write("\r\n" + "D " + "\"" + Command + "\"");
+			writer.flush();
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-
-	public String ReadOutput() throws IOException
-	{
+	public String ReadOutput() throws IOException {
 		String output;
-		if((output = reader.readLine()) != null)
-		{
-			//Prints out the answer received from the scale.
+		if ((output = reader.readLine()) != null) {
+			// Prints out the answer received from the scale.
 			System.out.println("Client: " + output);
 			return output;
-		}
-		else
-		{
+		} else {
 			return output;
 		}
 	}

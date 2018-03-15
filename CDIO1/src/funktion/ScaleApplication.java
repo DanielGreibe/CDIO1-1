@@ -22,18 +22,20 @@ public class ScaleApplication {
 	 * represents the text that is sent to the scale.
 	 * 
 	 * @throws DALException
+	 * @throws IOException 
+	 * @throws NullPointerException 
 	 */
 
-//	public ScaleApplication() throws DALException {
-//		try {
-//			//Scale.Connect("169.254.2.3", 8000);
-//		} catch (IOException e) {
-//			System.err.println("Couldn't connect to the scale");
-//			e.printStackTrace();
-//		}
-//	}
+	// public ScaleApplication() throws DALException {
+	// try {
+	// //Scale.Connect("169.254.2.3", 8000);
+	// } catch (IOException e) {
+	// System.err.println("Couldn't connect to the scale");
+	// e.printStackTrace();
+	// }
+	// }
 
-	public void MainMenu() throws DALException {
+	public void MainMenu() throws DALException, NullPointerException, IOException {
 		print = "--------------------------------------------------------\n-\n\t Welcome to Scale Application.\n-\n--------------------------------------------------------";
 		textInterface.printText(print);
 		boolean runningMain = true;
@@ -285,8 +287,7 @@ public class ScaleApplication {
 		return false;
 	}
 
-	public void tareScale()
-	{
+	public void tareScale() {
 		try {
 			Scale.SendCommand("T");
 		} catch (IOException e) {
@@ -294,27 +295,15 @@ public class ScaleApplication {
 			e.printStackTrace();
 		}
 	}
-	public void writeText(String text) {
-		try {
-			Scale.SendCommand(text);
-		} catch (IOException e) {
-			System.out.println("Could not write to the scale");
-			e.printStackTrace();
-		}
+
+	public void writeText(String text) throws IOException{
+		Scale.SendCommand(text);
 	}
 
-	public boolean waitForConfirmation() {
-		try {
-			if (Scale.ReadOutput() != null) {
-				return true;   
-			} else {
-				return false;
-			}
-		} catch (IOException e) {
-			System.out.println("Fejl opstod ved løsning fra vægten");
-			e.printStackTrace();
-		}
-		return true;
+	public void waitForConfirmation() {
+		System.out.println("Press enter to continue");
+		textInterface.waitForEnter();
+				
 	}
 
 	public String getScaleInput() {
@@ -330,7 +319,7 @@ public class ScaleApplication {
 		return ScaleOutput;
 	}
 
-	public void AskForID() {
+	public void AskForID() throws IOException {
 		// F�rst skrives til vægten, venter på et okay, tager værdien fra vægten
 		// og henter brugeren med samme ID og udskriver navnen på den bruger
 		// og venter til sidst p� et ok fra brugeren.
@@ -349,7 +338,7 @@ public class ScaleApplication {
 		waitForConfirmation();
 	}
 
-	public void askForBatch()  {
+	public void askForBatch() throws IOException {
 		writeText("Indtast ID");
 		waitForConfirmation();
 		String StringBatch = getScaleInput();
@@ -357,7 +346,7 @@ public class ScaleApplication {
 		waitForConfirmation();
 	}
 
-	public void resetTextOnScale() {
+	public void resetTextOnScale() throws IOException {
 		writeText("");
 		waitForConfirmation();
 	}
@@ -372,14 +361,13 @@ public class ScaleApplication {
 		}
 
 	}
-	
-	public String getTare()
-	{
+
+	public String getTare() {
 
 		return TareValue;
 	}
-	public void performBalancing()
-	{
+
+	public void performBalancing() throws IOException {
 		AskForID();
 		askForBatch();
 		writeText("Flyt alt fra v�gten");
@@ -395,7 +383,6 @@ public class ScaleApplication {
 		writeText("Afvejning fuldf�rt");
 		waitForConfirmation();
 		tareScale();
-		
-		
+
 	}
 }
