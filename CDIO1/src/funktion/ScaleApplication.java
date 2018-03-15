@@ -24,8 +24,14 @@ public class ScaleApplication {
 	 * @throws DALException
 	 */
 
-	public ScaleApplication() throws DALException {
-	}
+//	public ScaleApplication() throws DALException {
+//		try {
+//			//Scale.Connect("169.254.2.3", 8000);
+//		} catch (IOException e) {
+//			System.err.println("Couldn't connect to the scale");
+//			e.printStackTrace();
+//		}
+//	}
 
 	public void MainMenu() throws DALException {
 		print = "--------------------------------------------------------\n-\n\t Welcome to Scale Application.\n-\n--------------------------------------------------------";
