@@ -52,7 +52,7 @@ public class Client {
 	public void SendCommand(String Command) throws IOException
 	{
 		Command = keyboard.nextLine();
-		writer.write(Command +"\r\n");
+		writer.write("D" + "\"" + "\"" + "\r\n");
 		writer.flush();
 	}
 
