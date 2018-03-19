@@ -15,12 +15,6 @@ public class Scale
 	BufferedReader reader;
 	BufferedWriter writer;
 	
-	public Scale() {
-		Connect("169.254.2.3", 8000);
-	}
-
-	
-
 	public void Connect(String IP, int Portnumber) {
 		try {
 			// Makes a Scanner that is used to read the input to the Scale.
