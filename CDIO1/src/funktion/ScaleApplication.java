@@ -308,9 +308,9 @@ public class ScaleApplication {
 	}
 
 	public void AskForID() {
-		// F�rst skrives til vægten, venter på et okay, tager værdien fra vægten
+		// Først skrives til vægten, venter på et okay, tager værdien fra vægten
 		// og henter brugeren med samme ID og udskriver navnen på den bruger
-		// og venter til sidst p� et ok fra brugeren.
+		// og venter til sidst på et ok fra brugeren.
 		writeText("Indtast ID");
 		waitForConfirmation();
 		String StringID = getScaleInput();
@@ -358,17 +358,17 @@ public class ScaleApplication {
 	public void performBalancing()  {
 		AskForID();
 		askForBatch();
-		writeText("Flyt alt fra v�gten");
+		writeText("Remove everything from the weight");
 		waitForConfirmation();
-		writeText("Placer tom beholder p� v�gt");
-		waitForConfirmation();
-		saveTare(getScaleInput());
-		writeText("Put beholder med produkt p� v�gten");
+		writeText("Place empty container on the weight");
 		waitForConfirmation();
 		saveTare(getScaleInput());
-		writeText("Flyt alt fra v�gten");
+		writeText("Place container with product on the weight");
+		waitForConfirmation();
 		saveTare(getScaleInput());
-		writeText("Afvejning fuldf�rt");
+		writeText("Remove everything from the weight");
+		saveTare(getScaleInput());
+		writeText("weight completed");
 		waitForConfirmation();
 		tareScale();
 
