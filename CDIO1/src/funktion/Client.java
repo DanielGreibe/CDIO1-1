@@ -38,7 +38,7 @@ public class Client {
 
 	public void SendCommand(String Command) throws IOException{
 		try {
-			writer.write("\r\n" + "D " + "\"" + Command + "\"");
+			writer.write("D " + "\"" + Command + "\"" + "\r\n");
 			writer.flush();
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
