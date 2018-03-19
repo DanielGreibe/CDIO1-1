@@ -8,18 +8,20 @@ import data.*;
 
 public class MainTest {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		try {
-			ScaleApplication scale = new ScaleApplication();
-			Client client = new Client();
+			//SETUP
+			ScaleApplication applicationLayer = new ScaleApplication();
+			Scale scale = new Scale();
 			
-			client.Connect("169.254.2.3", 8000);
-			client.SendCommand("Indtast ID");
-			scale.waitForConfirmation();
-//			scale.AskForID();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			//FUNCTION
+			scale.Connect("169.254.2.3", 8000);
+			scale.WriteText2("Test2");
+			applicationLayer.writeText("Test1");
+			
+			
+			//CATCH EXCEPTIONS
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}

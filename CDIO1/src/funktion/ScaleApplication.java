@@ -14,7 +14,7 @@ public class ScaleApplication {
 	int tareWeight;
 	TUI textInterface = new TUI();
 	String print;
-	Client Scale = new Client();
+	Scale Scale = new Scale();
 	String TareValue;
 
 	/**
@@ -287,17 +287,12 @@ public class ScaleApplication {
 		return false;
 	}
 
-	public void tareScale() {
-		try {
-			Scale.SendCommand("T");
-		} catch (IOException e) {
-			System.err.println("Couldn't send command to Scale");
-			e.printStackTrace();
-		}
+	public void tareScale(){
+		Scale.writeText("T");
 	}
 
-	public void writeText(String text) throws IOException{
-		Scale.SendCommand(text);
+	public void writeText(String text) {
+		Scale.writeText(text);
 	}
 
 	public void waitForConfirmation() {
@@ -308,18 +303,11 @@ public class ScaleApplication {
 
 	public String getScaleInput() {
 		String ScaleOutput = "";
-		try {
-
-			ScaleOutput = Scale.ReadOutput();
-			return ScaleOutput;
-		} catch (IOException e) {
-			System.out.println("Fejl opstod ved løsning af værdi fra vægten");
-			e.printStackTrace();
-		}
+		ScaleOutput = Scale.ReadOutput();
 		return ScaleOutput;
 	}
 
-	public void AskForID() throws IOException {
+	public void AskForID() {
 		// F�rst skrives til vægten, venter på et okay, tager værdien fra vægten
 		// og henter brugeren med samme ID og udskriver navnen på den bruger
 		// og venter til sidst p� et ok fra brugeren.
@@ -338,7 +326,7 @@ public class ScaleApplication {
 		waitForConfirmation();
 	}
 
-	public void askForBatch() throws IOException {
+	public void askForBatch(){
 		writeText("Indtast ID");
 		waitForConfirmation();
 		String StringBatch = getScaleInput();
@@ -367,7 +355,7 @@ public class ScaleApplication {
 		return TareValue;
 	}
 
-	public void performBalancing() throws IOException {
+	public void performBalancing()  {
 		AskForID();
 		askForBatch();
 		writeText("Flyt alt fra v�gten");
