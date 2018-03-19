@@ -311,7 +311,7 @@ public class ScaleApplication {
 		// Først skrives til vægten, venter på et okay, tager værdien fra vægten
 		// og henter brugeren med samme ID og udskriver navnen på den bruger
 		// og venter til sidst på et ok fra brugeren.
-		writeText("Indtast ID");
+		writeText("Enter ID");
 		waitForConfirmation();
 		String StringID = getScaleInput();
 		int ID = Integer.parseInt(StringID);
@@ -327,7 +327,7 @@ public class ScaleApplication {
 	}
 
 	public void askForBatch(){
-		writeText("Indtast ID");
+		writeText("Enter ID");
 		waitForConfirmation();
 		String StringBatch = getScaleInput();
 		writeText(StringBatch);
