@@ -40,9 +40,6 @@ public class Scale
 		try {
 			writer.write("D " + "\"" + text + "\"" + "\r\n");
 			writer.flush();
-		} catch (NullPointerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,12 +47,62 @@ public class Scale
 		
 	}
 	
-	public void WriteText2(String text)
+	public void writeLongText(String text)
 	{
-		writeText(text);
+		try {
+			if(text.length() <= 30)
+			{
+				writer.write("P111 " + "\"" + text + "\"" + "\r\n");
+				writer.flush();
+			}
+			else
+			{
+				System.out.println("Text should be 30 or fewer characters");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-
-	public String ReadOutput() {
+	
+	public void getScaleValue()
+	{
+		try {
+			writer.write("S" + "\r\n");
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void goToScaleMode()
+	{
+		try {
+			writer.write("DW" + "\r\n");
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public String readOutputAndSplit()
+	{
+		String[] parts;
+		String output = null;
+		try {
+			if ((output = reader.readLine()) != null) {
+				// Prints out the answer received from the scale.
+				System.out.println("Client: " + output);
+				parts = output.split("\"");
+				return parts[1];
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return output;
+	}
+	public String readOutput() {
 		String output = null;
 		try {
 			if ((output = reader.readLine()) != null) {
@@ -68,5 +115,49 @@ public class Scale
 			e.printStackTrace();
 		}
 		return output;
+	}
+	
+	public String tareScale() {
+		String tareValue;
+		String[] Parts;
+		try {
+			writer.write("T" + "\r\n");
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		tareValue = readOutput();
+		Parts = tareValue.split(" ");
+		tareValue = Parts[7];
+		return tareValue;
+	}
+	
+	public String askForInput(String text)
+	{
+		String Output ="";
+		try {
+			writer.write("RM20 8 " + "\"" + text + "\" \"\" \"&3\" \r\n");
+			writer.flush();
+			Output = readOutput();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return Output;
+	}
+	
+	public void readAllOutputs()
+	{
+		String output;
+		try {
+			while(((output = reader.readLine()) != null) )
+			{
+				System.out.println(output);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

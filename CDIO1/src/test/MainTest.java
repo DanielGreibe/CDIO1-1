@@ -11,14 +11,13 @@ public class MainTest {
 	public static void main(String[] args) throws IOException {
 		try {
 			//SETUP
-			ScaleApplication applicationLayer = new ScaleApplication();
 			Scale scale = new Scale();
-			
+			ScaleApplication sc = new ScaleApplication();
 			
 			//FUNCTION
 			scale.Connect("169.254.2.3", 8000);
-			scale.WriteText2("Test2");
-			applicationLayer.writeText("Test1");
+			scale.askForInput("Indtast ID");
+			System.out.println(scale.readOutputAndSplit());
 			
 			
 			//CATCH EXCEPTIONS

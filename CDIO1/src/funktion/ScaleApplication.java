@@ -303,7 +303,7 @@ public class ScaleApplication {
 
 	public String getScaleInput() {
 		String ScaleOutput = "";
-		ScaleOutput = Scale.ReadOutput();
+		ScaleOutput = Scale.readOutput();
 		return ScaleOutput;
 	}
 
