@@ -319,7 +319,6 @@ public class ScaleApplication {
 		try {
 			username = datalag.getUser(ID).getUserName();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		writeText(username);
